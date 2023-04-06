@@ -1,4 +1,5 @@
 package org.example;
+//Merge Two Sorted Linked Lists
 
 public class llist {
     private Node head;
@@ -45,40 +46,72 @@ public class llist {
         System.out.print("END");
     }
 
-    public void removeduplicates()
+    public void insertatlast(int value)
     {
-        Node temp=head;
-        while(temp.next!=null)
-        {
-            if(temp.value==temp.next.value)
-            {
-                temp.next=temp.next.next;
-                size--;
-            }
-            else {
-                temp=temp.next;
+        Node node=new Node(value);
+        if(head!=null) {
+
+            Node temp = head;
+
+            while (temp.next != null) {
+                temp = temp.next;
             }
 
+            temp.next = node;
+            node.next = null;
         }
-        temp=tail;
-        temp.next=null;
+        else {
+            head = node;
+        }
+    }
+
+    public  static llist mergell(llist first,llist second)
+    {
+        Node f=first.head;
+        Node s=second.head;
+        llist dummylist=new llist();
+
+        if(f.value<s.value)
+        {
+            dummylist.insertatlast(f.value);
+            f=f.next;
+        }
+        else {
+            dummylist.insertatlast(s.value);
+            s=s.next;
+        }
+        while(f!=null)
+        {
+            dummylist.insertatlast(f.value);
+            f=f.next;
+        }
+        while(s!=null)
+        {
+            dummylist.insertatlast(s.value);
+            s=s.next;
+        }
+        return dummylist;
     }
     public static void main(String[] args) {
-        llist ll=new llist();
-        ll.insertatfirst(4);
-        ll.insertatfirst(4);
-        ll.insertatfirst(3);
-        ll.insertatfirst(3);
-        ll.insertatfirst(3);
-        ll.insertatfirst(3);
-        ll.insertatfirst(2);
-        ll.insertatfirst(2);
-        ll.insertatfirst(1);
-        ll.insertatfirst(1);
-        ll.display();
-        ll.removeduplicates();
-        System.out.println();
-        ll.display();
+        llist ll1=new llist();
+        llist ll2=new llist();
+        ll1.insertatlast(1);
+        ll1.insertatlast(1);
+        ll1.insertatlast(2);
+        ll1.insertatlast(3);
+        ll1.insertatlast(4);
+        ll2.insertatlast(1);
+        ll2.insertatlast(6);
+        ll2.insertatlast(7);
+        ll2.insertatlast(10);
+        System.out.println("first list is");
+        ll1.display();
+        System.out.println("second list is");
+        ll2.display();
+        System.out.println("merge linked lists");
+        llist ans=llist.mergell(ll1,ll2);
+        ans.display();
+
 
 
     }
