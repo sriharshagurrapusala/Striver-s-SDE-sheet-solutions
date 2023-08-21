@@ -1,0 +1,20 @@
+//Reading a STRING after reading 2 numeric values -->add sc.nextLine() immediately after reading numeric values and before reading string
+import java.util.Scanner;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int i = scan.nextInt();
+
+        // Write your code here.
+        double d=scan.nextDouble();
+        scan.nextLine();// When you use the nextInt() and nextDouble() methods of the Scanner class to read numeric values, they don't consume the newline character that is left in the input buffer. This can cause issues when you try to read the next line using nextLine().
+        String str=scan.nextLine();
+        
+
+        System.out.println("String: " + str);
+        System.out.println("Double: " + d);
+        System.out.println("Int: " + i);
+    }
+}
