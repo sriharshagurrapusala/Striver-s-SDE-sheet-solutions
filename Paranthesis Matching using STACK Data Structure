@@ -7,6 +7,8 @@ public class Main
 	    String s=sc.nextLine();
 	    Stack<Character> stack=new Stack<Character>();
 	    int c=0;
+	    if(s.length()%2==0)
+	    {
 	    for(int i=0;i<s.length();i++)
 	    {
 	        if(s.charAt(i)=='[')
@@ -21,7 +23,7 @@ public class Main
 	        {
 	            stack.push(')');
 	        }
-	        else{
+	        else if(!stack.isEmpty() && (s.charAt(i)==']' || s.charAt(i)=='}' || s.charAt(i)==')')){
 	            
 	            if(s.charAt(i)==stack.peek() )
 	            {
@@ -37,6 +39,10 @@ public class Main
 	    }
 	    else
 	    {
+	        System.out.println("not matched");
+	    }
+	    }
+	    else{
 	        System.out.println("not matched");
 	    }
 	}
