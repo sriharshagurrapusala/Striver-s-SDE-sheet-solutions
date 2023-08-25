@@ -1,0 +1,47 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+import java.util.*;
+public class Main
+
+{
+    public static int bit(int[]arr){
+        int l=arr.length;
+        //int a=arr[0];
+        int x=arr[0];
+        String s="";
+        for(int i=1;i<l;i++)
+        {
+            //a=arr[i]&arr[i+1];
+            x=x & arr[i];
+        }
+        s=Integer.toBinaryString(x);//Convert Integer to Binary String== Integer.toBinaryString(number);
+        System.out.println(s);
+        int sl=s.length();
+        int c=0;
+        for(int i=0;i<sl;i++)
+        {
+            if(s.charAt(i)=='1')
+            {
+                c++;
+            }
+        }
+        return c;
+    }
+	public static void main(String[] args) {
+	    Scanner sc=new Scanner (System.in);
+		int l=sc.nextInt();
+		int[] arr=new int[l];
+		System.out.println("enter elements");
+		for(int i=0;i<l;i++)
+		{
+		    arr[i]=sc.nextInt();
+		}
+		int x=bit(arr);
+		System.out.println(x);
+}
+}
