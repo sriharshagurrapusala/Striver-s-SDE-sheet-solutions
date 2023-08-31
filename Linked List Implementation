@@ -65,6 +65,44 @@ public class Main
             System.out.println("The value is not found in the Linked List to IAV");
         }
     }
+    public void deleteAtBegin()
+    {
+        if(head==null)
+        {
+            System.out.println("cannot delete without head");
+            return;
+        }
+        else
+        {
+        head=head.next;
+        }
+    }
+    
+    public void deleteAtEnd()
+    {
+        Node temp=head;
+        if(head==null)
+        {
+            System.out.println("head is null cannot delete end");
+            return;
+        }
+        else if(head.next==null)
+        {
+            System.out.println(head.data+" is deleted");
+            head=null;
+        }
+        else if(temp.next.next==null)
+        {
+            temp.next=null;
+            return;
+        }
+        while(temp.next.next!=null)
+        {
+            temp=temp.next;
+        }
+        System.out.println(temp.data+" is deleted");
+        temp.next=null;
+    }
     
     public boolean search(int x)
     {
@@ -101,10 +139,12 @@ public class Main
     {
         Main m=new Main();
         m.insertAtBegin(10);
-        m.insertAtBegin(20);
-        m.insertAtBegin(30);
-        m.insertAtEnd(100);
-        m.insertAfterValue(100,9999);
+        //m.insertAtBegin(20);
+        //m.insertAtBegin(30);
+        //m.insertAtEnd(100);
+        //m.insertAfterValue(100,9999);
+        //m.deleteAtBegin();
+        m.deleteAtEnd();
         m.display();
     }
 }
