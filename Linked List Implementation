@@ -1,0 +1,110 @@
+public class Main
+{
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public Node head=null;
+    public Node tail=null;
+    public void insertAtBegin(int data)
+    {
+        Node n=new Node(data);
+        if(head==null)
+        {
+            head=n;
+            tail=n;
+        }
+        else{
+            n.next=head;
+            head=n;
+            
+        }
+    }
+    
+    public void insertAtEnd(int data)
+    {
+        Node n=new Node(data);
+        if(head==null)
+        {
+            head=n;
+            tail=n;
+        }
+        else{
+            Node temp=head;
+            while(temp.next!=null)
+            {
+                temp=temp.next;
+            }
+            temp.next=n;
+        }
+    }
+    public void insertAfterValue(int value,int data)
+    {
+        
+        if(search(value))
+        {
+            Node temp=head;
+            Node n=new Node(data);
+            while(temp!=null)
+            {
+                if(temp.data==value)
+                {
+                    n.next=temp.next;
+                    temp.next=n;
+                }
+                temp=temp.next;
+            }
+        }
+        else{
+            System.out.println("The value is not found in the Linked List to IAV");
+        }
+    }
+    
+    public boolean search(int x)
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            if(temp.data==x)
+            {
+                return true;
+            }
+            temp=temp.next;
+        }
+        return false;
+    }
+    public void display()
+    {
+        if(head==null)
+        {
+            System.out.println("head is not created");
+        }
+        else
+        {
+            Node temp=head;
+            while(temp!=null)
+            {
+                System.out.println(temp.data);
+                temp=temp.next;
+            }
+        }
+        
+        
+    }
+    public static void main(String args[])
+    {
+        Main m=new Main();
+        m.insertAtBegin(10);
+        m.insertAtBegin(20);
+        m.insertAtBegin(30);
+        m.insertAtEnd(100);
+        m.insertAfterValue(100,9999);
+        m.display();
+    }
+}
