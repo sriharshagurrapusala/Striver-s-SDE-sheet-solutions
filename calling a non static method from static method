@@ -1,0 +1,25 @@
+class MyClass {
+    // Non-static method
+    void nonStaticMethod() {
+        System.out.println("This is a non-static method.");
+    }
+
+    // Static method
+    static void staticMethod() {
+        System.out.println("This is a static method.");
+
+        // Call the non-static method from the static method
+        MyClass obj = new MyClass();
+        obj.nonStaticMethod(); // Calling the non-static method using an instance
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyClass.staticMethod(); // Calling the static method
+
+        // You can also create an instance and call the non-static method
+        MyClass obj = new MyClass();
+        obj.nonStaticMethod(); // Calling the non-static method using an instance
+    }
+}
