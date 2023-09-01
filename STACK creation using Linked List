@@ -1,0 +1,143 @@
+import java.util.*;
+public class Main
+{
+    class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public Node head=null;
+    public Node tail=null;
+   
+    
+    public void insertAtEnd(int data)
+    {
+        Node n=new Node(data);
+        if(head==null)
+        {
+            head=n;
+            tail=n;
+        }
+        else{
+            Node temp=head;
+            while(temp.next!=null)
+            {
+                temp=temp.next;
+            }
+            temp.next=n;
+        }
+    }
+    
+    
+    
+    public void deleteAtEnd()
+    {
+        Node temp=head;
+        if(head==null)
+        {
+            System.out.println("head is null cannot delete end");
+            return;
+        }
+        else if(head.next==null)
+        {
+            System.out.println(head.data+" is deleted");
+            head=null;
+        }
+        else if(temp.next.next==null)
+        {
+            System.out.println(temp.next.data+" is deleted");
+            temp.next=null;
+            return;
+        }
+        else
+        {
+        while(temp.next.next!=null)
+        {
+            temp=temp.next;
+        }
+        System.out.println(temp.next.data+" is deleted");
+        temp.next=null;
+        }
+    }
+    
+    public void peek()
+    {
+        if(head.next==null)
+        {
+            System.out.print(head.data);
+        }
+        else
+        {
+        Node temp=head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        System.out.print("Top value is"+temp.data);
+        }
+    }
+    
+    
+    public void reverseDisplay(Node top)     //To display Stack we have to Reverse Display Linked List
+    {
+        Node temp=top;
+        if(head==null)
+        {
+            System.out.println("head is not created");
+            return;
+        }
+        if(temp.next==null)
+        {
+            System.out.println(temp.data);
+            return;
+        }
+        else{
+            reverseDisplay(temp.next);
+            System.out.println(temp.data);
+            return;
+        }
+        
+        
+        
+    }
+    public static void main(String args[])
+    {
+        Main m=new Main();
+        Scanner sc=new Scanner(System.in);
+        System.out.print("enter no of operations");
+        int n=sc.nextInt();
+        while(n!=0)
+        {
+            System.out.print("enter 1:push  2:pop  3:peek   4:DisplayStack   5:terminate");
+            int c=sc.nextInt();
+            switch(c)
+            {
+                case 1:
+                    System.out.print("enter value to push");
+                    m.insertAtEnd(sc.nextInt());
+                    System.out.print("value inserted");
+                    break;
+                case 2:
+                    m.deleteAtEnd();
+                    System.out.print("top value deleted");
+                    break;
+                case 3:
+                    m.peek();
+                    break;
+                case 4:
+                    m.reverseDisplay(m.head);
+                    break;
+                case 5:
+                    n=0;
+                    break;
+                    
+            }
+        }
+        
+    }
+}
