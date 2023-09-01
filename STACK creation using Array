@@ -1,0 +1,96 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+import java.util.*;
+public class Main
+{
+    int top;
+    int size=5;
+    int[] arr=new int[size];
+    Main()
+    {
+        top=-1;
+    }
+    public boolean isempty()
+    {
+        if(top==-1)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void push(int x)
+    {
+        if(top==size-1)
+        {
+            System.out.print("stack overflow");
+            return;
+        }
+        top++;
+        arr[top]=x;
+        System.out.print("value pushed");
+        return;
+    }
+    
+    public int pop()
+    {
+        if(top==-1)
+        {
+            System.out.print("Stack underflow");
+            return -1;
+        }
+        else{
+            System.out.print(arr[top]+" is popped");
+            int p=arr[top];
+            top--;
+            return p;
+            
+        }
+    }
+    public void display()
+    {
+        for(int i=top;i>=0;i--)
+        {
+            System.out.print(arr[i]);
+        }
+    }
+	public static void main(String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	    Main m=new Main();
+	    int n=6;
+	    while(n!=0)
+	    {
+	        System.out.print("enter operation 1:push  2:pop  3:isempty 4:display 5:terminate ");
+	        int m1=sc.nextInt();
+	        switch(m1)
+	        {
+	            case 1:
+	                System.out.println("enter value to push");
+	                m.push(sc.nextInt());
+	                break;
+	           case 2:
+	               m.pop();
+	               break;
+	           case 3:
+	               boolean a=m.isempty();
+	               System.out.print(a);
+	               break;
+	           case 4:
+	               m.display();
+	               break;
+	           case 5:
+	               n=0;
+	               break;
+	               
+	           
+	                
+	        }
+	    }
+	    
+	    
+	}
+}
