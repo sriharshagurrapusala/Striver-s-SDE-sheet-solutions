@@ -1,0 +1,61 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+import java.util.*;
+public  class Main
+{
+    class Node
+    {
+        int data;
+        Node left;
+        Node right;
+        Node(int data)
+        {
+            this.data=data;
+            left=null;
+            right=null;
+        }
+    }
+    public void inorder(Node root)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        inorder(root.left);
+        System.out.print(root.data);
+        inorder(root.right);
+    }
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		Main m=new Main();
+		System.out.print("enter nodes without space");
+		String str=sc.nextLine();
+		String[] arr=str.split("");
+		System.out.println(Arrays.toString(arr));
+		Queue<Node> queue=new LinkedList<>();
+		Node root=m.new Node(Integer.parseInt(arr[0]));// m.new Node() --> Accessing Non static variables,methods from static main() method
+		queue.add(root);
+		for(int i=1;i<arr.length;i=i+2)
+		{
+		    Node curr=queue.poll();
+		    if(!arr[i].equals("-1"))
+		    
+		    {
+		        curr.left=m.new Node(Integer.parseInt(arr[i]));
+		        queue.add(curr.left);
+		    }
+		    if(!arr[i+1].equals("-1"))
+		    {
+		        curr.right=m.new Node(Integer.parseInt(arr[i+1]));
+		        queue.add(curr.right);
+		    }
+		}
+		m.inorder(root);
+		
+	}
+}
