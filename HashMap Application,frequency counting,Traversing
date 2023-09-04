@@ -1,0 +1,49 @@
+//To count the Frequency of each element in an Array using HashMap
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		HashMap<Integer,Integer> hm=new HashMap<Integer,Integer>();
+		int[] arr={1,2,3,3,1,2,2};
+		//for each for array
+		for(int i:arr)
+		{
+		    hm.put(i,0);
+		}
+		
+		//increasing count frequency using forEach loop through array
+		for(int i:arr)
+		{
+		    int freq=hm.get(i);
+		    hm.put(i,++freq);
+		}
+		//Traversing HashMap
+		for(Map.Entry e:hm.entrySet())
+		{
+		    System.out.println("key is "+e.getKey());
+		    System.out.println("value is "+e.getValue());
+		}
+		//getting maximum times repeated element by traversing through given ARRAY
+		int max=0,ans=0;
+		for(int i:arr)
+		{
+		    if(hm.get(i)>max)
+		    {
+		        max=hm.get(i);
+		        ans=i;
+		    }
+		}
+		System.out.println("maximum times repeated element is "+ans+" "+max+" times");
+		//getting maximum times repeated element BY TRAVERSING THROUGH OUR HashMap
+		int max1=0,ans1=0;
+		for(Map.Entry e:hm.entrySet())
+		{
+		    if((int)e.getKey()>max1)            //Type Object is converted into (int)
+		    {
+		        max1=(int)e.getKey();
+		        ans1=(int)e.getValue();
+		    }
+		}
+		System.out.println("maximum times repeated element is "+ans1+" "+max+" times");
+}
+}
