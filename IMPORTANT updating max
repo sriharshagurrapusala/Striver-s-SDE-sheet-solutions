@@ -1,0 +1,23 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		String s="this is mine";
+		
+		String[] arr=s.split(" ");
+		int n=arr.length;
+		int len=0,max=0;
+		String ans="";
+		for(int i=0;i<n;i++)
+		{
+		    len=arr[i].length();
+		    if(len > max)
+		    {
+		        max=len;
+		        ans=new String(arr[i]);
+		    }
+		}
+		System.out.println("maximum length of word is "+max);
+		System.out.println("that word is "+ans);
+	}
+}
