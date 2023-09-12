@@ -1,0 +1,48 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		List<Character> ts=new ArrayList<Character>();
+		List<Character> ts1=new ArrayList<Character>();
+		String s1="OpenAI is awesome!";
+		String s2="AWESOME! is openai";
+		s1=s1.toLowerCase();
+		s2=s2.toLowerCase();
+		int n1=s1.length();
+		int n2=s2.length();
+		int c=0;
+		for(int i=0;i<n2;i++)
+		{
+		    ts1.add(s2.charAt(i));
+		    
+		}
+		System.out.println(ts1);
+		Collections.sort(ts1);
+		System.out.println(ts1);
+		for(int i=0;i<=n1-n2;i++)
+		{
+		    String s=s1.substring(i,i+n2);
+		    System.out.println(s);
+		    for(int j=0;j<n2;j++)
+		    {
+		        ts.add(s.charAt(j));
+		    }
+		    Collections.sort(ts);
+		    if(ts.containsAll(ts1))
+		    {
+		        //System.out.println(ts);
+		        System.out.println("Anagram Found at index "+i);
+		        c++;
+		    }
+		    ts.removeAll(ts);
+		    //System.out.println(ts);
+		}
+		if(c>0)
+		{
+		    System.out.println("Anagram Found");
+		}
+		else{
+		    System.out.println("Anagram Not Found");
+		}
+	}
+}
