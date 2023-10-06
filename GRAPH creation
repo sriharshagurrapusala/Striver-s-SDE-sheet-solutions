@@ -1,0 +1,35 @@
+
+import java.util.*;
+public class Main
+{
+    public static void addEdge(ArrayList<ArrayList<Integer>> adjal,int u,int v)
+    {
+        adjal.get(u).add(v);
+        adjal.get(v).add(u);
+    }
+    public static void display(ArrayList<ArrayList<Integer>> al)
+    {
+        for(int i=0;i<al.size();i++)
+        {
+            for(int j=0;j<al.get(i).size();j++)
+            {
+                System.out.print(al.get(i).get(j)+" ");
+            }
+            System.out.println();
+        }
+    }
+	public static void main(String[] args) {
+		ArrayList<ArrayList<Integer>> al=new ArrayList<ArrayList<Integer>>();
+		int noofvertices=5;
+		for(int i=0;i<noofvertices;i++){
+		    al.add(new ArrayList<Integer>());
+		}
+		addEdge(al,0,1);
+		addEdge(al,0,2);
+		addEdge(al,1,2);
+		addEdge(al,1,3);
+		addEdge(al,4,2);
+		//System.out.println(al);
+		display(al);
+	}
+}
