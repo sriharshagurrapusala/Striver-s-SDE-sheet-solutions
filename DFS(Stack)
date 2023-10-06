@@ -1,0 +1,67 @@
+import java.util.*;
+public class Main
+{
+    public static void addEdge(ArrayList<ArrayList<Integer>> adjList,int u,int v)
+    {
+        adjList.get(u).add(v);
+        //adjList.get(v).add(u);
+    }
+    
+    public static void displayGraph(ArrayList<ArrayList<Integer>> al)
+    {
+        for(int i=0;i<al.size();i++)
+        {
+            for(int j=0;j<al.get(i).size();j++)
+            {
+                System.out.print(al.get(i).get(j));
+            }
+            System.out.println();
+        }
+    }
+    
+    public static void BFS(ArrayList<ArrayList<Integer>> adjList,int source,int noOfVertices )
+    {
+        boolean visited[]=new boolean[noOfVertices+1];
+        Stack <Integer> q=new Stack<Integer>();
+        visited[source]=true;//Marking that node as visited before adding that node to Queue
+        q.push(source);
+        while(!q.isEmpty())
+        {
+            int element=q.pop();
+            System.out.print(element+" ");
+            for(int i : adjList.get(element))
+            {
+                if(visited[i]==false)
+                {
+                    visited[i]=true;
+                    q.push(i);
+                }
+            }
+            
+        }
+    }
+	public static void main(String[] args) {
+		ArrayList<ArrayList<Integer>> al=new ArrayList<ArrayList<Integer>>();
+		int noOfVertices=4;
+		for(int i=0;i<noOfVertices;i++)
+		{
+		    al.add(new ArrayList<Integer>());
+		}
+		//Adding AdjacentList
+		addEdge(al,2,0);
+		addEdge(al,0,2);
+		addEdge(al,1,2);
+		addEdge(al,0,1);
+		addEdge(al,3,3);
+		addEdge(al,1,3);
+		displayGraph(al);
+		
+		//Now al is the Graph Representation
+		
+		//DFS
+		int source=2;
+		System.out.println("DFS Traversal");
+		BFS(al,source,noOfVertices);
+		
+	}
+}
