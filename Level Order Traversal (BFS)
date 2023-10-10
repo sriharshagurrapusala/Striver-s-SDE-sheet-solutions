@@ -1,0 +1,74 @@
+
+import java.util.*;
+public class Main
+{
+    public static void addEdge(ArrayList<ArrayList<Integer>> al,int u,int v)
+    {
+        al.get(u).add(v);
+        al.get(v).add(u);
+    }
+    public static void display(ArrayList<ArrayList<Integer>> al)
+    {
+        for(int i=0;i<al.size();i++)
+        {
+            for(int j=0;j<al.get(i).size();j++)
+            {
+                System.out.print(al.get(i).get(j)+" ");
+            }
+            System.out.println();
+        }
+    }
+    public static ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> adjList,int source,int noOfVertices)
+    {
+        boolean[] visited=new boolean[noOfVertices+1];//+1 modify to get rid of error ArrayIndexOutOfBoundsException
+        Queue<Integer> q=new LinkedList<>();
+        visited[source]=true;
+        q.add(source);
+        ArrayList<Integer> bfs=new ArrayList<>();
+        while(!q.isEmpty())
+        {
+            int element=q.poll();
+            //System.out.println(element+" ");
+            bfs.add(element);
+            for(int i:adjList.get(element))
+            {
+                if(visited[i]==false)
+                {
+                    visited[i]=true;
+                    q.add(i);
+                }
+            }
+            
+        }
+        
+        return bfs;
+    }
+    
+	public static void main(String[] args) {
+		//cost adjacentcy matrix
+		//cost adjacentcy list
+		ArrayList<ArrayList<Integer>> al=new ArrayList<ArrayList<Integer>>();
+		int noOfVertices=10;
+		for(int i=0;i<=noOfVertices;i++)
+		{
+		    al.add(new ArrayList<Integer>());
+		}
+		addEdge(al,1,2);
+		addEdge(al,1,7);
+		addEdge(al,2,3);
+		addEdge(al,2,6);
+		addEdge(al,3,4);
+		addEdge(al,3,5);
+		addEdge(al,7,8);
+		addEdge(al,7,10);
+		addEdge(al,8,9);
+		//display(al);
+		int source=1;
+		ArrayList<Integer> LevelOrderTraversal=new ArrayList<>();
+		LevelOrderTraversal=bfs(al,source,noOfVertices);
+		System.out.println(LevelOrderTraversal);
+		
+		
+		
+	}
+}
