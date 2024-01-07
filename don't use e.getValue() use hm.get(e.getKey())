@@ -1,0 +1,58 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	    
+		LinkedHashMap<String,ArrayList<String>> hm=new LinkedHashMap<>();
+		ArrayList<String> clist=new ArrayList<>();
+		for(int i=0;i<3;i++)
+		{
+		    clist.add(sc.nextLine());
+		}
+		
+		ArrayList<String> tlist=new ArrayList<>();
+		for(int i=0;i<8;i++)
+		{
+		    tlist.add(sc.nextLine());
+		}
+		
+		ArrayList<String> slist=new ArrayList<>();
+		for(int i=0;i<4;i++)
+		{
+		    slist.add(sc.nextLine());
+		}
+		
+		ArrayList<String> blist=new ArrayList<>();
+		for(int i=0;i<3;i++)
+		{
+		    blist.add(sc.nextLine());
+		}
+		
+		System.out.println(clist);
+		System.out.println(tlist);
+		System.out.println(slist);
+		System.out.println(blist);
+		hm.put("Coffee",clist);
+		hm.put("Tea",tlist);
+		hm.put("Soups",slist);
+		hm.put("Beverages",blist);
+		System.out.println("enter 1st letter of main menu");
+		char ch=sc.next().charAt(0);
+		System.out.println("enter number for sub menu");
+		int num=sc.nextInt();
+		String ans="";
+		Object obj="";
+		for(Map.Entry e:hm.entrySet())
+		{
+		    if(Character.toUpperCase(ch)==(e.getKey()).toString().charAt(0))
+		    {
+		        ans=hm.get(e.getKey()).get(num-1);   //Using hm.get() and e.getKey() inside it for getting ArrayList and not the Object
+		
+		    }
+		}
+		System.out.println(ans);
+		
+		
+	}
+}
