@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class Main
+{
+    public static void BT(ArrayList<Integer> al,boolean[] visited,ArrayList<ArrayList<Integer>> res,ArrayList<Integer> permutation)
+    {
+        System.out.println("per size is "+permutation.size()+" al size is "+al.size());
+        if(permutation.size()==al.size())
+        {
+            System.out.println("size matches and entered to add");
+            res.add(new ArrayList<>(permutation));
+            System.out.println("res is"+res);
+            return;
+        }
+        for(int i=0;i<al.size();i++)
+        {
+            System.out.println("for loop entered");
+            System.out.println("i value"+i);
+            if(!visited[i])
+            {
+                permutation.add(al.get(i));
+                visited[i]=true;
+                System.out.println("per is"+permutation);
+                BT(al,visited,res,permutation);
+                System.out.println("BT call completed");
+                System.out.println("after complete i value "+i);
+                visited[i]=false;
+                permutation.remove(permutation.size()-1);
+                System.out.println("after removed, per is now "+permutation);
+            }
+        }
+    }
+	public static void main(String[] args) {
+		ArrayList<Integer> al=new ArrayList<>();
+		al.add(1);
+		al.add(2);
+		al.add(3);
+		boolean[] visited=new boolean[al.size()];
+		//System.out.println(Arrays.toString(visited));
+		ArrayList<ArrayList<Integer>> res=new ArrayList<ArrayList<Integer>>();
+		ArrayList<Integer> permutation=new ArrayList<>();
+		BT(al,visited,res,permutation);
+		System.out.println(res);
+		
+		
+	}
+}
