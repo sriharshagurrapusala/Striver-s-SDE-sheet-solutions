@@ -1,0 +1,101 @@
+import java.util.*;
+
+public class Main
+{
+    public static void BackTracking(ArrayList<Integer> al,ArrayList<ArrayList<Integer>> res,ArrayList<Integer> permutations,boolean[] visited,int k)
+    {
+        if(permutations.size()==k)
+        {
+            res.add(new ArrayList<Integer>(permutations));
+            return;
+        }
+        for(int i=0;i<al.size();i++)
+        {
+            if(!visited[i])
+            {
+                permutations.add(al.get(i));
+                System.out.println(permutations);
+                visited[i]=true;
+                BackTracking(al,res,permutations,visited,k);
+                visited[i]=false;
+                permutations.remove(permutations.size()-1);
+            }
+        }
+    }
+	public static void main(String[] args) {
+		int l=1,h=10;
+		int k=2;
+		int len=(h-l+1)*k;
+		ArrayList<Integer> al=new ArrayList<>();
+		boolean[] visited=new boolean[len];
+		System.out.println(Arrays.toString(visited));
+		ArrayList<ArrayList<Integer>>res=new ArrayList<ArrayList<Integer>>();
+		ArrayList<Integer> permutations=new ArrayList<>();
+		for(int i=l;i<=h;i++)
+		{
+		    for(int j=0;j<k;j++)
+		    {
+		        al.add(i);
+		    }
+		}
+		System.out.println(al);
+		BackTracking(al,res,permutations,visited,k);
+		System.out.println(res);
+		HashSet<ArrayList<ArrayList<Integer>>> hs=new HashSet<ArrayList<ArrayList<Integer>>>();
+		hs.add(res);
+		System.out.println("no duplicates"+res);
+		
+		HashMap<ArrayList<Integer>,Integer> hm=new HashMap<>();
+		//for each loop for res
+		for(ArrayList<Integer> ele :res)
+		{
+		    hm.put(ele,0);
+		}
+		//for each
+		
+		for(ArrayList<Integer> ele:res)
+		{
+		    int freq=hm.get(ele);
+		    hm.put(ele,++freq);
+		}
+		
+		//traversion hash map
+		
+		for(Map.Entry e:hm.entrySet())
+		{
+		    System.out.println(e.getKey()+"--->"+hm.get(e.getKey()));
+		}
+		
+		//even sum
+		ArrayList<Integer> ans=new ArrayList<>();
+		int count=0,sum=0;
+		
+		/****************************************************************
+		
+	                  use hm.keySet() to get ArrayList type of values
+	   
+	   ***********************************************************************************/
+		System.out.println(hm.keySet());
+		for(ArrayList<Integer> arr:hm.keySet())
+		{
+		    //System.out.println(arr);
+		    ans=arr;
+		    
+		    //System.out.println(ans);
+		    
+		    for(int i :ans)
+		    {
+		        sum+=i;
+		    }
+		    if(sum%2==0)
+		    {
+		        count++;
+		    }
+		    sum=0;
+		    ans.clear();
+		}
+		System.out.println(count);
+		
+		
+	}
+}
