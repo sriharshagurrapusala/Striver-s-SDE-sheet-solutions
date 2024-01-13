@@ -1,0 +1,164 @@
+/*       You are given a m liter jug and a n liter jug where 0 < m < n. Both the jugs are initially empty. The jugs don’t have markings to allow measuring smaller quantities. You have to use the jugs to measure d liters of water where d < n. Determine the minimum no of operations to be performed to obtain d liters of water in one of jug. 
+The operations you can perform are: 
+
+Empty a Jug
+Fill a Jug
+Pour water from one jug to the other until one of the jugs is either empty or full.
+
+
+*/
+
+
+import java.util.*;
+
+public class Main
+{
+    public static ArrayList<Integer> selectOp(int option,int a,int b,int m,int n)
+    {
+        ArrayList<Integer> al=new ArrayList<>();
+        final int p=a,q=b;
+        int x=p,y=q;
+        switch(option)
+        {
+            case 1:
+                x=m;
+                y=y;
+                al.add(x);
+                al.add(y);
+                break;
+            case 2:
+                x=x;
+                y=n;
+                                al.add(x);
+                al.add(y);
+                break;
+            case 3:
+                x=0;
+                y=y;
+                                al.add(x);
+                al.add(y);
+                break;
+            case 4:
+                x=x;
+                y=0;
+                                al.add(x);
+                al.add(y);
+                break;
+            case 5:
+                if(x+y<=n && x+y>0)
+                {
+                    y=x+y;
+                    x=0;
+                al.add(x);
+                al.add(y);
+                }
+                
+                break;
+            case 6:
+                if(x+y>n)
+                {
+                    x=x-n+y;
+                    y=n;
+                                    al.add(x);
+                al.add(y);
+                }
+                
+                break;
+            case 7:
+                if(x+y<=m && x+y>0)
+                {
+                    x=x+y;
+                    y=0;
+                                    al.add(x);
+                al.add(y);
+                }
+                
+                break;
+            case 8:
+                if(x+y>m)
+                {
+                    y=y-m+x;
+                    x=m;
+                                    al.add(x);
+                al.add(y);
+                }
+                
+                break;
+            default:
+            System.out.println("Invalid operation");
+                
+        }
+        
+        return al;
+    }
+    public static ArrayList<ArrayList<Integer>> operations(ArrayList<Integer> al,int m,int n)
+    {
+        int x=al.get(0),y=al.get(1);
+        ArrayList<ArrayList<Integer>> result=new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> oplist=new ArrayList<>();
+        for(int i=1;i<=8;i++)
+        {
+            x=al.get(0);
+            y=al.get(1);
+            oplist=selectOp(i,x,y,m,n);
+            System.out.println("oplist "+oplist);
+            if(!oplist.isEmpty() && !result.contains(oplist) && !oplist.equals(al))
+            {
+            result.add(oplist);
+            }
+            System.out.println("result "+result);
+            //oplist.clear();
+        }
+        return result;
+    }
+	public static void main(String[] args) {
+		ArrayList<Integer> al=new ArrayList<>();
+		al.add(0);
+		al.add(0);
+		int m=3,n=5;
+		int k=4;
+		ArrayList<ArrayList<Integer>> ans=new ArrayList<ArrayList<Integer>>();
+		//ans=operations(al,m,n);
+		//System.out.println(ans);
+		Stack<ArrayList<Integer>> stack=new Stack<ArrayList<Integer>>();
+		ArrayList<ArrayList<Integer>> explored=new ArrayList<ArrayList<Integer>>();
+		stack.push(al);
+		
+		ArrayList<Integer> popped=new ArrayList<>();
+		Stack<ArrayList<Integer>> stack2=new Stack<ArrayList<Integer>>();
+		stack2.push(al);
+		//ArrayList<ArrayList<Integer>> opr1=new ArrayList<ArrayList<Integer>>();
+		while(!stack.empty())
+	{	
+		popped=stack.pop();
+		explored.add(popped);
+		System.out.println("popped is "+popped);
+		ans=operations(popped,m,n);
+		for(ArrayList<Integer> ele:ans)
+		{
+		    if(!explored.contains(ele) && !stack.contains(ele))
+		    {
+		    stack.push(ele);
+		    stack2.push(ele);
+		    }
+		    
+		}
+		//popped=stack.pop();
+		//ans=operations(popped,m,n);
+		//explored.add(popped);
+	}
+	System.out.println("stack is "+stack);
+	System.out.println("stack2 is "+stack2);
+	System.out.println("explored is "+explored);
+	ArrayList<Integer> steps=new ArrayList<>();
+	for(ArrayList<Integer> final1:explored)
+	{
+	    if(final1.get(0)==k || final1.get(1)==k)
+	    {
+	        steps.add(explored.indexOf(final1));
+	        
+	    }
+	}
+	System.out.println(steps);
+	}
+}
