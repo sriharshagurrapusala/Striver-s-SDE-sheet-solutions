@@ -1,0 +1,94 @@
+import java.util.*;
+public class Main
+{
+  
+  public static void BackTracking(ArrayList<Character> al,ArrayList<ArrayList<Character>>result,ArrayList<Character> permutations,boolean[] visited,int k)
+  {
+    System.out.println("fun exec");
+    if(permutations.size()==k)
+    {
+      result.add(new ArrayList<Character>(permutations));
+      return;
+    }
+    
+    for(int i=0;i<al.size();i++)
+    {
+      if(!visited[i])
+      {
+        permutations.add(al.get(i));
+        System.out.println(permutations);
+        visited[i]=true;
+        BackTracking(al,result,permutations,visited,k);
+        visited[i]=false;
+        permutations.remove(permutations.size()-1);
+      }
+    }
+  }
+  
+  public static boolean check(ArrayList<Character> al)
+  {
+    int n=al.size();
+    boolean adjacent=false;
+    for(int i=0;i<al.size()-1;i++)
+    {
+      if(al.get(i).equals(al.get(i+1)))
+      {
+        adjacent=true;
+        break;
+      }
+    }
+    return adjacent;
+  }
+  public static void main(String args[])
+  {
+    Scanner sc=new Scanner(System.in);
+    int nr=sc.nextInt();
+    int ng=sc.nextInt();
+    int nt=sc.nextInt();
+    ArrayList<Character> al=new ArrayList<>();
+    for(int i=0;i<nr;i++)
+    {
+      al.add('R');
+      
+    }
+    
+    for(int i=0;i<ng;i++)
+    {
+      al.add('G');
+    }
+    
+    for(int i=0;i<nt;i++)
+    {
+      al.add('T');
+    }
+    System.out.println(al);
+    ArrayList<ArrayList<Character>> result=new ArrayList<ArrayList<Character>>();
+    ArrayList<Character> permutations=new ArrayList<>();
+    int len=al.size();
+    System.out.println(len);
+    boolean[] visited=new boolean[len];
+    System.out.println(Arrays.toString(visited));
+    int k=3;
+    BackTracking(al,result,permutations,visited,k);
+    System.out.println(result);
+    LinkedHashSet<ArrayList<Character>> hs=new LinkedHashSet<ArrayList<Character>>();
+    for(ArrayList<Character> ele : result)
+    {
+      if(!hs.contains(ele))
+      {
+        hs.add(ele);
+      }
+    }
+    System.out.println(hs);
+    int count=0;
+    for(ArrayList<Character> x:hs)
+    {
+      if(check(x)!=true)
+      {
+        count++;
+      }
+    
+    }
+    System.out.println("Number of no two adjacent gems are not equal lists are "+count);
+  }
+}
